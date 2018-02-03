@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hw11_newjs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button id="js-btn" class="btn">Получить</button>
+    <button id="js-btn-send" class="btn">Отправить</button>
+    <table class="centered bordered highlight">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>score</th>
+            </tr>
+        </thead>
+        <tbody id="js-tbody"></tbody>
+    </table>
+    <!-- Шаблон одной строки для tbody -->
+    <script type="text/template" id="table-row">
+        <tr scope="row">
+            <td>
+                <%- id%>
+            </td>
+            <td>
+                <%- name%>
+            </td>
+            <td>
+                <%- score%>
+            </td>
+        </tr>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+    <script src="js.js"></script>
+</body>
+
+</html>
