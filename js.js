@@ -1,6 +1,8 @@
 // Globs
 const btn = document.querySelector("#js-btn");
 const btn1 = document.querySelector("#js-btn-send");
+const btn2 = document.querySelector("#js-btn-delete");
+const btn3 = document.querySelector("#js-btn-update");
 const tBody = document.querySelector("#js-tbody");
 const htmlTpl = document.querySelector("#table-row").textContent.trim();
 const compiled = _.template(htmlTpl);
@@ -18,7 +20,7 @@ const updateView = persons => {
 
 
 
-const getUsersBase = () =>
+const getUsers = () =>
     fetch('http://fecore.net.ua/rest/')
     .then(response => {
         if (response.ok) {
@@ -26,24 +28,53 @@ const getUsersBase = () =>
         }
         throw new Error("Error fetching data");
     })
+    .then(data => {
+        updateView(data);
+
+
+    })
     .catch(err => {
         console.error("Error: ", err);
     })
 
-const getUsers = () =>
-    getUsersBase().then(persons => {
-        updateView(persons);
-    })
 
 btn.addEventListener("click", getUsers);
 
 const addUser = () => {
+    let addUrl = `http://fecore.net.ua/rest/?action=1&name=${document.querySelector('#userName').value}&score=${document.querySelector('#userScore').value}`;
+    fetch(addUrl)
+        .catch(error => {
+                console.error("Error:", error);
+            }
+
+        );
+    document.querySelector("#user").reset();
+}
+
+btn1.addEventListener("click", addUser);
+btn1.addEventListener("click", getUsers);
+
+// const removeUser = () => {
+//     fetch('http://fecore.net.ua/rest/', {
+//             method: "DELETE",
+//             body: {
+//                 id: "2910",
+//             }
+//         })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             console.log(data)
+//         });
+// }
+
+// btn2.addEventListener("click", removeUser);
+
+
+const updateUser = () => {
     fetch('http://fecore.net.ua/rest/', {
-            method: "POST",
+            method: "UPDATE",
             body: {
-                id: "7777",
-                name: "Pavel",
-                score: 777
+                id: "2910",
             }
         })
         .then((response) => response.json())
@@ -52,4 +83,4 @@ const addUser = () => {
         });
 }
 
-btn1.addEventListener("click", addUser);
+btn3.addEventListener("click", updateUser);
