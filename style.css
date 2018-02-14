@@ -7,3 +7,11 @@ body {
     margin: auto;
     margin-top: 1rem;
 }
+
+#removeId {
+    width: 180px;
+}
+
+button {
+    width: 180px;
+}

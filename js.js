@@ -54,33 +54,30 @@ const addUser = () => {
 btn1.addEventListener("click", addUser);
 btn1.addEventListener("click", getUsers);
 
-// const removeUser = () => {
-//     fetch('http://fecore.net.ua/rest/', {
-//             method: "DELETE",
-//             body: {
-//                 id: "2910",
-//             }
-//         })
-//         .then((response) => response.json())
-//         .then((data) => {
-//             console.log(data)
-//         });
-// }
+const removeUser = () => {
+    let removeUrl = `http://fecore.net.ua/rest/?action=3&id=${document.querySelector('#removeId').value}`
+    fetch(removeUrl)
+        .catch(error => {
+                console.error("Error:", error);
+            }
 
-// btn2.addEventListener("click", removeUser);
+        );
+    document.querySelector("#user").reset();
+}
 
+btn2.addEventListener("click", removeUser);
+btn2.addEventListener("click", getUsers);
 
 const updateUser = () => {
-    fetch('http://fecore.net.ua/rest/', {
-            method: "UPDATE",
-            body: {
-                id: "2910",
+    let addUrl = `http://fecore.net.ua/rest/?action=2&id=${document.querySelector('#removeId').value}&name=${document.querySelector('#userName').value}&score=${document.querySelector('#userScore').value}`;
+    fetch(addUrl)
+        .catch(error => {
+                console.error("Error:", error);
             }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-        });
+
+        );
+    document.querySelector("#user").reset();
 }
 
 btn3.addEventListener("click", updateUser);
+btn3.addEventListener("click", getUsers);
